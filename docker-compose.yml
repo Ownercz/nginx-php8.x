@@ -1,0 +1,12 @@
+version: "3.6"
+
+services:
+  web:
+    image: realmdigital/nginx-php8.x:latest
+    container_name: realmdigital-nginx-php8.0-test-instance
+    restart: always
+    environment:
+      ENABLE_XDEBUG: 1
+    ports:
+      - '80:80'
+      - '443:443'
