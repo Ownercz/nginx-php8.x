@@ -30,29 +30,29 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 	iputils-ping \
 	cron && \
 	# Install PHP
-	apt-get install -y php8.0-fpm \
-	php8.0-mysql \
-	php8.0-curl \
-	php8.0-gd \
-	php8.0-intl \
+	apt-get install -y php8.1-fpm \
+	php8.1-mysql \
+	php8.1-curl \
+	php8.1-gd \
+	php8.1-intl \
 	php-memcache \
-	php8.0-sqlite \
-	php8.0-tidy \
-	php8.0-pgsql \
-	php8.0-ldap \
+	php8.1-sqlite \
+	php8.1-tidy \
+	php8.1-pgsql \
+	php8.1-ldap \
 	freetds-common \
-	php8.0-pgsql \
-	php8.0-sqlite3 \
-	php8.0-xml \
-	php8.0-mbstring \
-	php8.0-soap \
-	php8.0-zip \
-	php8.0-cli \
-	php8.0-sybase \
-	php8.0-xdebug \
-	php8.0-odbc \
-	php8.0-imagick \
-	php8.0-bcmath
+	php8.1-pgsql \
+	php8.1-sqlite3 \
+	php8.1-xml \
+	php8.1-mbstring \
+	php8.1-soap \
+	php8.1-zip \
+	php8.1-cli \
+	php8.1-sybase \
+	php8.1-xdebug \
+	php8.1-odbc \
+	php8.1-imagick \
+	php8.1-bcmath
 
 # Cleanup
 RUN apt-get remove --purge -y software-properties-common && \
@@ -68,24 +68,24 @@ RUN sed -i -e"s/worker_processes  1/worker_processes 5/" /etc/nginx/nginx.conf &
 	sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 128m;\n\tproxy_buffer_size 256k;\n\tproxy_buffers 4 512k;\n\tproxy_busy_buffers_size 512k/" /etc/nginx/nginx.conf && \
 	echo "daemon off;" >> /etc/nginx/nginx.conf && \
 	# PHP-FPM configuration
-	sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/8.0/fpm/php.ini && \
-	sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" /etc/php/8.0/fpm/php.ini && \
-	sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" /etc/php/8.0/fpm/php.ini && \
-	sed -i -e "s/;opcache.memory_consumption\s*=\s*128/opcache.memory_consumption=256/g" /etc/php/8.0/fpm/php.ini && \
-	sed -i -e "s/;opcache.max_accelerated_files\s*=\s*10000/opcache.max_accelerated_files=20000/g" /etc/php/8.0/fpm/php.ini && \
-	sed -i -e "s/;opcache.validate_timestamps\s*=\s*1/opcache.validate_timestamps=0/g" /etc/php/8.0/fpm/php.ini && \
-	sed -i -e "s/;realpath_cache_size\s*=\s*4096k/realpath_cache_size=4096K/g" /etc/php/8.0/fpm/php.ini && \
-	sed -i -e "s/;realpath_cache_ttl\s*=\s*120/realpath_cache_ttl=600/g" /etc/php/8.0/fpm/php.ini && \
-	sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/8.0/fpm/php-fpm.conf && \
-	sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" /etc/php/8.0/fpm/pool.d/www.conf && \
-	sed -i -e "s/pm.max_children = 5/pm.max_children = 9/g" /etc/php/8.0/fpm/pool.d/www.conf && \
-	sed -i -e "s/pm.start_servers = 2/pm.start_servers = 3/g" /etc/php/8.0/fpm/pool.d/www.conf && \
-	sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" /etc/php/8.0/fpm/pool.d/www.conf && \
-	sed -i -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = 4/g" /etc/php/8.0/fpm/pool.d/www.conf && \
-	sed -i -e "s/pm.max_requests = 500/pm.max_requests = 200/g" /etc/php/8.0/fpm/pool.d/www.conf && \
-	sed -i -e "/pid\s*=\s*\/run/c\pid = /run/php8.0-fpm.pid" /etc/php/8.0/fpm/php-fpm.conf && \
-	sed -i -e "s/;listen.mode = 0660/listen.mode = 0750/g" /etc/php/8.0/fpm/pool.d/www.conf && \
-	sed -i -e "s/;clear_env = no/clear_env = no/g" /etc/php/8.0/fpm/pool.d/www.conf && \
+	sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/8.1/fpm/php.ini && \
+	sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" /etc/php/8.1/fpm/php.ini && \
+	sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" /etc/php/8.1/fpm/php.ini && \
+	sed -i -e "s/;opcache.memory_consumption\s*=\s*128/opcache.memory_consumption=256/g" /etc/php/8.1/fpm/php.ini && \
+	sed -i -e "s/;opcache.max_accelerated_files\s*=\s*10000/opcache.max_accelerated_files=20000/g" /etc/php/8.1/fpm/php.ini && \
+	sed -i -e "s/;opcache.validate_timestamps\s*=\s*1/opcache.validate_timestamps=0/g" /etc/php/8.1/fpm/php.ini && \
+	sed -i -e "s/;realpath_cache_size\s*=\s*4096k/realpath_cache_size=4096K/g" /etc/php/8.1/fpm/php.ini && \
+	sed -i -e "s/;realpath_cache_ttl\s*=\s*120/realpath_cache_ttl=600/g" /etc/php/8.1/fpm/php.ini && \
+	sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/8.1/fpm/php-fpm.conf && \
+	sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" /etc/php/8.1/fpm/pool.d/www.conf && \
+	sed -i -e "s/pm.max_children = 5/pm.max_children = 9/g" /etc/php/8.1/fpm/pool.d/www.conf && \
+	sed -i -e "s/pm.start_servers = 2/pm.start_servers = 3/g" /etc/php/8.1/fpm/pool.d/www.conf && \
+	sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" /etc/php/8.1/fpm/pool.d/www.conf && \
+	sed -i -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = 4/g" /etc/php/8.1/fpm/pool.d/www.conf && \
+	sed -i -e "s/pm.max_requests = 500/pm.max_requests = 200/g" /etc/php/8.1/fpm/pool.d/www.conf && \
+	sed -i -e "/pid\s*=\s*\/run/c\pid = /run/php8.1-fpm.pid" /etc/php/8.1/fpm/php-fpm.conf && \
+	sed -i -e "s/;listen.mode = 0660/listen.mode = 0750/g" /etc/php/8.1/fpm/pool.d/www.conf && \
+	sed -i -e "s/;clear_env = no/clear_env = no/g" /etc/php/8.1/fpm/pool.d/www.conf && \
 	# remove default nginx configurations
 	rm -Rf /etc/nginx/conf.d/* && \
 	rm -Rf /etc/nginx/sites-available/default && \
@@ -93,7 +93,7 @@ RUN sed -i -e"s/worker_processes  1/worker_processes 5/" /etc/nginx/nginx.conf &
 	# create workdir directory
 	mkdir -p /var/www
 
-COPY ./config/php/xdebug.ini /etc/php/8.0/mods-available/xdebug.ini
+COPY ./config/php/xdebug.ini /etc/php/8.1/mods-available/xdebug.ini
 COPY ./config/nginx/nginx.conf /etc/nginx/sites-available/default.conf
 # Supervisor Config
 COPY ./config/supervisor/supervisord.conf /etc/supervisord.conf
