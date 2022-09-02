@@ -52,6 +52,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 	php8.1-xdebug \
 	php8.1-odbc \
 	php8.1-imagick \
+	php8.1-redis \
 	php8.1-bcmath
 
 # Cleanup
