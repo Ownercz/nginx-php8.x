@@ -9,16 +9,16 @@ FASTCGI_PARAM_HTTPS=${FASTCGI_PARAM_HTTPS:=on}
 ENABLE_XDEBUG=${ENABLE_XDEBUG:=0}
 
 # Display PHP error's or not
-sed -i -e "s/error_reporting =.*=/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/g" /etc/php/8.1/fpm/php.ini
-sed -i -e "s/display_errors =.*/display_errors = Off/g" /etc/php/8.1/fpm/php.ini
+#sed -i -e "s/error_reporting =.*=/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/g" /etc/php/8.1/fpm/php.ini
+#sed -i -e "s/display_errors =.*/display_errors = Off/g" /etc/php/8.1/fpm/php.ini
 
 # Tweak nginx to match the workers to cpu's
-procs=$(cat /proc/cpuinfo |grep processor | wc -l)
-sed -i -e "s/worker_processes 5/worker_processes $procs/" /etc/nginx/nginx.conf
+#procs=$(cat /proc/cpuinfo |grep processor | wc -l)
+#sed -i -e "s/worker_processes 5/worker_processes $procs/" /etc/nginx/nginx.conf
 
 # Set the root in the conf
-sed -i -e "s#%%NGINX_ROOT%%#$NGINX_ROOT#" /etc/nginx/sites-available/default.conf
-sed -i -e "s#%%FASTCGI_PARAM_HTTPS%%#$FASTCGI_PARAM_HTTPS#" /etc/nginx/sites-available/default.conf
+#sed -i -e "s#%%NGINX_ROOT%%#$NGINX_ROOT#" /etc/nginx/sites-available/default.conf
+#sed -i -e "s#%%FASTCGI_PARAM_HTTPS%%#$FASTCGI_PARAM_HTTPS#" /etc/nginx/sites-available/default.conf
 
 # Again set the right permissions (needed when mounting from a volume)
 set +e 
