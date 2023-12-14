@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
-LABEL maintainer="noreply@realmdigital.co.za"
+LABEL maintainer="radim@lipovcan.cz"
 
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEN noninteractive
