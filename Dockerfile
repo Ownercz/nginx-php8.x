@@ -11,6 +11,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 	mkdir /run/php && \
 	apt-get update && \
 	apt-get install -y --no-install-recommends apt-utils \ 
+	gpg-agent \ 
 	software-properties-common \
 	language-pack-en-base && \
 	LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php && \
@@ -18,7 +19,6 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 	apt-get install -y python-setuptools \ 
 	curl \
 	git \
- 	gpg-agent \
 	nano \
 	sudo \
 	unzip \
