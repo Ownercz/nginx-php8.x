@@ -4,7 +4,8 @@ LABEL maintainer="radim@lipovcan.cz"
 
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEN noninteractive
-
+RUN apt-get update  && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install postfix
 RUN dpkg-divert --local --rename --add /sbin/initctl && \
 	ln -sf /bin/true /sbin/initctl && \
 	mkdir /var/run/sshd && \
@@ -27,7 +28,6 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 	supervisor \
 	nginx \
 	memcached \
-	ssmtp \
 	iputils-ping \
 	cron && \
 	# Install PHP
@@ -61,8 +61,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 
 
 # Cleanup
-RUN apt-get remove --purge -y software-properties-common && \
-	apt-get autoremove -y && \
+RUN     apt-get autoremove -y && \
 	apt-get clean && \
 	apt-get autoclean && \
 	# install composer
