@@ -18,6 +18,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 	apt-get install -y python-setuptools \ 
 	curl \
 	git \
+ 	gpg-agent \
 	nano \
 	sudo \
 	unzip \
